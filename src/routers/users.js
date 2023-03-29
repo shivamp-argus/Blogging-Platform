@@ -64,6 +64,17 @@ router.get("/user", async (req, res) => {
   }
 });
 
+// Viewing own profile
+router.get("/user/me", auth, async (req, res) => {
+  //   res.send(req.user);
+  try {
+    await req.user.populate({ path: "blogs" });
+    res.send({ users: req.user, blogs: req.user.blogs });
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
+});
+
 // Selecting user by id
 router.get("/user/:id", async (req, res) => {
   const userId = req.params.id;

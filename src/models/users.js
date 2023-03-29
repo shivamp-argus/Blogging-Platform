@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcrypt";
-import Blogs from "./blogs.js";
 import jwt from "jsonwebtoken";
+
+import Blogs from "./blogs.js";
+import Comments from "./comments.js";
 
 const usersSchema = new mongoose.Schema(
   {
@@ -54,6 +56,12 @@ usersSchema.virtual("blogs", {
   foreignField: "userId",
 });
 
+usersSchema.virtual("comments", {
+  ref: "Comments",
+  localField: "_id",
+  foreignField: "userComId",
+});
+
 // generate auth token
 usersSchema.methods.generateAuthToken = async function () {
   const token = jwt.sign({ _id: this._id.toString() }, "BloggingPlatform");
@@ -98,7 +106,8 @@ usersSchema.pre("save", async function (next) {
 });
 
 usersSchema.pre("remove", async function (next) {
-  await Blogs.deleteMany({ owner: this._id });
+  await Blogs.deleteMany({ userId: this._id });
+  await Comments.deleteMany({ userComId: this._id });
   next();
 });
 

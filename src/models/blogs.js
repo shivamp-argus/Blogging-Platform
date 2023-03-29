@@ -23,6 +23,12 @@ const blogsSchema = new mongoose.Schema(
   }
 );
 
+blogsSchema.virtual("comments", {
+  ref: "Comments",
+  localField: "_id",
+  foreignField: "blogId",
+});
+
 const Blogs = mongoose.model("Blogs", blogsSchema);
 
 export default Blogs;
