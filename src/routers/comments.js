@@ -37,23 +37,24 @@ router.delete("/comment/:blogId/:commentId", auth, async (req, res) => {
   const blogId = req.params.blogId;
   const blog = await Blogs.findById(blogId);
   if (!blog) {
-    return res.status(400).send("Blog doesn't exist");
+    return res.status(400).send("Blog not found");
   }
   try {
-    const comment = await Comments.findOneAndDelete({
+    const comment = await Comments.findOne({
       _id: commentId,
-      userComId: userId,
     });
-    console.log(blog.userId);
-    console.log(comment.userComId);
-    console.log(blog.userId.equals(comment.userComId));
-    if (!comment || !blog.userId.equals(userId)) {
+    // only comment creator and blog creator can delete the comment
+    if (!comment) {
       return res
         .status(400)
         .send("You are not allowed to delete someone else comment");
     }
-
-    res.status(200).send(comment);
+    // console.log("comment user id", comment.userComId);
+    if (!(comment.userComId.equals(userId) || blog.userId.equals(userId))) {
+      return res.status(400).send("you are not allowed");
+    }
+    const deletedComment = await Comments.deleteOne({ _id: commentId });
+    res.status(200).send(deletedComment);
   } catch (err) {
     res.status(400).send(err.message);
   }
