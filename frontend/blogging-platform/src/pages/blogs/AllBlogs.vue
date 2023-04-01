@@ -3,8 +3,8 @@
     <div v-if="hasBlogs">
       <blog-item
         v-for="blog of blogs"
-        :key="blog.id"
-        :id="blog.id"
+        :key="blog._id"
+        :id="blog._id"
         :body="blog.body"
         :title="blog.title"
         class="mt-2"

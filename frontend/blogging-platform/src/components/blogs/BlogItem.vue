@@ -20,36 +20,15 @@ export default {
   props: ["id", "title", "body"],
   computed: {
     blogDetailLink() {
-      console.log(...this.$store.getters["blogs"]);
       return this.$route.path + "/" + this.id;
-    },
-    blogTitle() {
-      return this.title;
-    },
-    blogBody() {
-      return this.body;
     },
   },
   data() {
     return {
       showComments: false,
-
-      comments: [
-        {
-          id: 1,
-          text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, ipsam?",
-        },
-        {
-          id: 2,
-          text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, ipsam?",
-        },
-        {
-          id: 3,
-          text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, ipsam?",
-        },
-      ],
     };
   },
+  methods: {},
 };
 </script>
 <style></style>
