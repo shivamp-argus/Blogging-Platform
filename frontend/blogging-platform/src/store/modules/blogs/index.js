@@ -6,7 +6,11 @@ export default {
   state() {
     return {
       blogs: [],
-      blog: null,
+      blog: {
+        title: "hello",
+        body: "",
+        comments: [],
+      },
     };
   },
   mutations,
