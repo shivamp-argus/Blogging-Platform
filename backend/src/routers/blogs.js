@@ -20,7 +20,7 @@ router.post("/blog", auth, async (req, res) => {
 });
 
 // getting all the blogs
-router.get("/blog", auth, async (req, res) => {
+router.get("/blog", async (req, res) => {
   try {
     const blogs = await Blogs.find();
     res.status(200).send(blogs);

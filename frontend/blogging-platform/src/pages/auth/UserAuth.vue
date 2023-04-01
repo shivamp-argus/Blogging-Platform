@@ -1,6 +1,6 @@
 <template>
   <form class="container" @submit.prevent="userFormData">
-    <div class="mb-3">
+    <div class="mb-3" v-if="mode === 'signup'">
       <label for="username" class="form-label">Enter your username</label>
       <input
         type="text"
@@ -32,8 +32,14 @@
       />
     </div>
     <div class="actions">
-      <button>{{ submitButtonCaption }}</button>
-      <button type="button" @click="switchAuthMode">
+      <button class="btn btn-dark me-3">
+        {{ submitButtonCaption }}
+      </button>
+      <button
+        class="btn btn-light btn-outline-dark"
+        type="button"
+        @click="switchAuthMode"
+      >
         {{ switchModeButton }}
       </button>
     </div>
@@ -84,6 +90,7 @@ export default {
       const actionPayload = {
         email: this.email,
         password: this.password,
+        username: this.username,
       };
       try {
         if (this.mode === "login") {
@@ -96,6 +103,13 @@ export default {
       } catch (err) {
         console.log(err);
         this.error = err.message || "Failed to authenticate";
+      }
+    },
+    switchAuthMode() {
+      if (this.mode === "login") {
+        this.mode = "signup";
+      } else {
+        this.mode = "login";
       }
     },
   },

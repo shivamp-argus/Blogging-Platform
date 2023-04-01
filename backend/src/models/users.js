@@ -67,7 +67,6 @@ usersSchema.methods.generateAuthToken = async function () {
   const token = jwt.sign({ _id: this._id.toString() }, "BloggingPlatform");
   this.tokens = this.tokens.concat({ token });
   await this.save();
-  // console.log(token);
   return token;
 };
 

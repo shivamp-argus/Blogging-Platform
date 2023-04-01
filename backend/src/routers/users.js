@@ -6,9 +6,12 @@ const router = new express.Router();
 
 // Creating user
 router.post("/user", async (req, res) => {
+  // console.log(req.body);
   try {
     const user = new Users({ ...req.body });
+    // console.log(user);
     const token = await user.generateAuthToken();
+    // console.log(token);
     await user.save();
     res.status(200).send({ user, token });
   } catch (err) {
@@ -22,6 +25,7 @@ router.post("/user/login", async (req, res) => {
     const { email, password } = req.body;
     const user = await Users.findByCredentials(email, password);
     const token = await user.generateAuthToken();
+
     res.status(200).send({ user, token });
   } catch (err) {
     res.status(400).send(err.message);

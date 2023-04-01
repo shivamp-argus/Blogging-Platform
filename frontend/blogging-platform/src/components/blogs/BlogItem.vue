@@ -1,18 +1,12 @@
 <template>
   <router-link :to="blogDetailLink" class="text-decoration-none text-dark">
-    <div class="card">
+    <div class="card mt-4">
       <div class="card-header">{{ title }}</div>
       <div class="card-body">
         <h5 class="card-title">Lorem, ipsum dolor sit amet</h5>
         <p class="card-text">
           {{ body }}
         </p>
-        <button class="btn btn-dark">Comments</button>
-        <!-- <comments-list
-                    v-for="comment of comments"
-                    :key="comment.id"
-                    :text="comment.text"
-                    ></comments-list> -->
       </div>
     </div>
   </router-link>
@@ -26,6 +20,7 @@ export default {
   props: ["id", "title", "body"],
   computed: {
     blogDetailLink() {
+      console.log(...this.$store.getters["blogs"]);
       return this.$route.path + "/" + this.id;
     },
     blogTitle() {

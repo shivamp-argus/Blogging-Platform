@@ -1,13 +1,20 @@
 <template>
   <div class="container">
-    <blog-item
-      v-for="blog of blogs"
-      :key="blog.id"
-      :id="blog.id"
-      :body="blog.body"
-      :title="blog.title"
-      class="mt-2"
-    ></blog-item>
+    <div v-if="hasBlogs">
+      <blog-item
+        v-for="blog of blogs"
+        :key="blog.id"
+        :id="blog.id"
+        :body="blog.body"
+        :title="blog.title"
+        class="mt-2"
+      ></blog-item>
+    </div>
+    <div v-else>
+      <h2>Sorry no blogs found</h2>
+      <h3>Why don't you create one</h3>
+      <router-link to="/blogs/create">Create Blog</router-link>
+    </div>
   </div>
 </template>
 <script>
@@ -18,29 +25,28 @@ export default {
   },
   data() {
     return {
-      blogs: [
-        {
-          id: 1,
-          title: "Lorem ipsum dolor sit amet.",
-          body: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora et placeat nesciunt consectetur itaque maxime vero dolor hic quae minima.",
-        },
-        {
-          id: 2,
-          title: "Lorem ipsum dolor sit amet.",
-          body: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora et placeat nesciunt consectetur itaque maxime vero dolor hic quae minima.",
-        },
-        {
-          id: 3,
-          title: "Lorem ipsum dolor sit amet.",
-          body: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora et placeat nesciunt consectetur itaque maxime vero dolor hic quae minima.",
-        },
-        {
-          id: 4,
-          title: "Lorem ipsum dolor sit amet.",
-          body: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora et placeat nesciunt consectetur itaque maxime vero dolor hic quae minima.",
-        },
-      ],
+      error: null,
     };
+  },
+  computed: {
+    blogs() {
+      return this.$store.getters["blogs"];
+    },
+    hasBlogs() {
+      return this.blogs.length > 0;
+    },
+  },
+  created() {
+    this.loadBlogs();
+  },
+  methods: {
+    async loadBlogs() {
+      try {
+        await this.$store.dispatch("loadBlogs");
+      } catch (err) {
+        this.error = err.message || "Blogs cannot be loaded at this moment";
+      }
+    },
   },
 };
 </script>

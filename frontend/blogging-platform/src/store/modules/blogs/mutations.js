@@ -1,5 +1,5 @@
 export default {
-  loadBlogs(state, payload) {
+  setBlogs(state, payload) {
     state.blogs = payload;
   },
 };
