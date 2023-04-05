@@ -13,10 +13,41 @@ export default {
     try {
       const response = await fetch(`http://localhost:4000/blog/${payload}`);
       const responseData = await response.json();
-      console.log(responseData);
+
       context.commit("setBlog", responseData);
     } catch (err) {
       console.log(err.message);
+    }
+  },
+  // async loadUser() {
+  //   try {
+  //     const userId = this.$store.getters.commentUser;
+
+  //     console.log(userId);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // },
+  async createBlog(context, payload) {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("http://localhost:4000/blog", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          title: payload.title,
+          body: payload.body,
+        }),
+      });
+      const responseData = await response.json();
+      console.log(responseData);
+      const blogs = context.getters["blogs"].push(responseData);
+      context.commit("setBlogs", blogs);
+    } catch (err) {
+      console.log(err);
     }
   },
 };

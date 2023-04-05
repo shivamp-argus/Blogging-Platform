@@ -5,14 +5,8 @@ import getters from "./getters";
 export default {
   state() {
     return {
-      blogs: [],
-      blog: {
-        blog: {
-          title: "",
-          body: "",
-        },
-        comments: [],
-      },
+      comments: [],
+      // userCom: [],
     };
   },
   mutations,

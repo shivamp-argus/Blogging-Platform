@@ -3,6 +3,7 @@ import express from "express";
 import Comments from "../models/comments.js";
 import auth from "../middlewares/auth.js";
 import Blogs from "../models/blogs.js";
+import Users from "../models/users.js";
 
 const router = new express.Router();
 
@@ -20,10 +21,21 @@ router.post("/comment/:blogId", auth, async (req, res) => {
 });
 
 // getting all the comments on particular blog
-router.get("/comment/:blogId", auth, async (req, res) => {
+router.get("/comment/:blogId", async (req, res) => {
   const blogId = req.params.blogId;
   try {
     const comments = await Comments.find({ blogId });
+
+    // console.log(comments);
+    // let commentDetail = [];
+    // for (let comment of comments) {
+    //   const user = await Users.find(comment.userComId);
+    //   // let userDetail = ...user;
+
+    //   commentDetail.push({ id: comment._id, username: user[0].username });
+    // }
+    // console.log(commentDetail);
+    // console.log(user);
     res.status(200).send(comments);
   } catch (err) {
     res.status(400).send(err.message);

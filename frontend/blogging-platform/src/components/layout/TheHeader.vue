@@ -21,7 +21,7 @@
             >
           </li>
           <li class="nav-item">
-            <router-link to="/blog/create" class="nav-link"
+            <router-link to="/blogs/create" class="nav-link"
               >Create Blog</router-link
             >
           </li>

@@ -5,4 +5,7 @@ export default {
   blogDetail(state) {
     return state.blog;
   },
+  commentUser(state) {
+    return state.blog.comments;
+  },
 };
