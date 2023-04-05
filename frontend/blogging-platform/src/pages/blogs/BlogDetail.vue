@@ -23,6 +23,9 @@
             Add Comment
           </button>
         </add-comment>
+        <button class="btn btn-dark card-footer ms-3" @click="deleteBlog">
+          Delete Blog
+        </button>
       </div>
 
       <ul class="list-group list-group-flush" v-if="hasComments === true">
@@ -75,6 +78,14 @@ export default {
     },
     toggleComments() {
       this.hasComments = !this.hasComments;
+    },
+    async deleteBlog() {
+      try {
+        await this.$store.dispatch("deleteBlog", this.id);
+        this.$router.replace("/blogs");
+      } catch (err) {
+        this.error = err.message || "You are not allowed";
+      }
     },
   },
 };

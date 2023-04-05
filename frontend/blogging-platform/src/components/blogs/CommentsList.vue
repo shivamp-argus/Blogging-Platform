@@ -18,6 +18,9 @@ export default {
       return this.$store.getters["comments"];
     },
   },
+  updated() {
+    this.loadComments();
+  },
   methods: {
     async loadComments() {
       const blogId = this.$route.params.id;

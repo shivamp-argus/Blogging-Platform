@@ -25,17 +25,6 @@ router.get("/comment/:blogId", async (req, res) => {
   const blogId = req.params.blogId;
   try {
     const comments = await Comments.find({ blogId });
-
-    // console.log(comments);
-    // let commentDetail = [];
-    // for (let comment of comments) {
-    //   const user = await Users.find(comment.userComId);
-    //   // let userDetail = ...user;
-
-    //   commentDetail.push({ id: comment._id, username: user[0].username });
-    // }
-    // console.log(commentDetail);
-    // console.log(user);
     res.status(200).send(comments);
   } catch (err) {
     res.status(400).send(err.message);

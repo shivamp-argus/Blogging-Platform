@@ -41,7 +41,13 @@
               >
                 Close
               </button>
-              <button type="submit" class="btn btn-primary">Add comment</button>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                data-bs-dismiss="modal"
+              >
+                Add comment
+              </button>
             </div>
           </form>
         </div>

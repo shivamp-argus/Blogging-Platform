@@ -50,4 +50,25 @@ export default {
       console.log(err);
     }
   },
+  async deleteBlog(context, payload) {
+    try {
+      const token = localStorage.getItem("token");
+      // const userId = localStorage.getItem("userId");
+      const response = await fetch(`http://localhost:4000/blog/${payload}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const responseData = await response.json();
+
+      // const blogs = context.getters["blogs"];
+
+      context.commit("setBlogs", responseData);
+    } catch (err) {
+      console.log(err.message);
+    }
+  },
 };

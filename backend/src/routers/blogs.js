@@ -78,12 +78,17 @@ router.patch("/blog/:id", auth, async (req, res) => {
 // deleting the blog by id
 router.delete("/blog/:id", auth, async (req, res) => {
   const blogId = req.params.id;
+  const userId = req.user.id;
   if (!blogId) {
     return res.status(400).send("Please enter valid id");
   }
   try {
-    const blog = await Blogs.findByIdAndDelete(blogId);
-    res.status(200).send(blog);
+    const blog = await Blogs.findOneAndDelete({ _id: blogId, userId });
+    if (!blog) {
+      res.status(400).send("Blog not found");
+    } else {
+      res.status(200).send(blog);
+    }
   } catch (err) {
     res.status(400).send(err);
   }
