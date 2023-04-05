@@ -43,7 +43,7 @@ export default {
         }),
       });
       const responseData = await response.json();
-      console.log(responseData);
+      // console.log(responseData);
       const blogs = context.getters["blogs"].push(responseData);
       context.commit("setBlogs", blogs);
     } catch (err) {

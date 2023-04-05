@@ -17,11 +17,6 @@ export default {
     commentsList() {
       return this.$store.getters["comments"];
     },
-    // username() {
-    //   // const username = { ...this.$store.getters["userCom"] };
-    //   // console.log(username);
-    //   return this.$store.getters["userCom"];
-    // },
   },
   methods: {
     async loadComments() {

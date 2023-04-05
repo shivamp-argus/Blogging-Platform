@@ -11,12 +11,18 @@
         <p>{{ blog.body }}</p>
       </div>
       <div class="card-footer">
-        <button class="btn btn-dark card-footer" @click="toggleComments">
+        <button class="btn btn-dark card-footer me-3" @click="toggleComments">
           View Comments
         </button>
-        <button class="btn btn-dark card-footer" @click="addComments">
-          Add Comment
-        </button>
+        <add-comment
+          ><button
+            class="btn btn-dark card-footer"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            Add Comment
+          </button>
+        </add-comment>
       </div>
 
       <ul class="list-group list-group-flush" v-if="hasComments === true">
@@ -33,16 +39,19 @@
   </div>
 </template>
 <script>
+import AddComment from "../../components/blogs/AddComment.vue";
 import CommentList from "../../components/blogs/CommentsList.vue";
 export default {
   components: {
     "comment-list": CommentList,
+    "add-comment": AddComment,
   },
   props: ["id"],
   data() {
     return {
       error: null,
       hasComments: false,
+      viewAddComment: false,
     };
   },
   computed: {
@@ -66,13 +75,6 @@ export default {
     },
     toggleComments() {
       this.hasComments = !this.hasComments;
-    },
-    async addComments() {
-      try {
-        await this.$store.dispatch("addComment");
-      } catch (err) {
-        this.error = err.message || "Comments cannot be added yet";
-      }
     },
   },
 };
