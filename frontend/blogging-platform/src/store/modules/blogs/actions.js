@@ -19,15 +19,7 @@ export default {
       console.log(err.message);
     }
   },
-  // async loadUser() {
-  //   try {
-  //     const userId = this.$store.getters.commentUser;
 
-  //     console.log(userId);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // },
   async createBlog(context, payload) {
     try {
       const token = localStorage.getItem("token");
@@ -45,6 +37,7 @@ export default {
       const responseData = await response.json();
       // console.log(responseData);
       const blogs = context.getters["blogs"].push(responseData);
+      console.log(blogs);
       context.commit("setBlogs", blogs);
     } catch (err) {
       console.log(err);
@@ -63,10 +56,27 @@ export default {
       });
 
       const responseData = await response.json();
-
+      console.log(responseData);
       // const blogs = context.getters["blogs"];
 
-      context.commit("setBlogs", responseData);
+      context.commit("deleteBlog", responseData);
+    } catch (err) {
+      console.log(err.message);
+    }
+  },
+  async updateBlog(context, payload) {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`http://localhost:4000/blog/${payload}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: payload.blog,
+      });
+      const responseData = await response.json();
+      context.commit("setBlog", responseData);
     } catch (err) {
       console.log(err.message);
     }

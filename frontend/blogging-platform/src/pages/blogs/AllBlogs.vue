@@ -26,10 +26,12 @@ export default {
   data() {
     return {
       error: null,
+      blogsLoaded: false,
     };
   },
   computed: {
     blogs() {
+      console.log("hello from blogs");
       return this.$store.getters["blogs"];
     },
     hasBlogs() {
@@ -37,13 +39,18 @@ export default {
     },
   },
   created() {
-    this.loadBlogs();
+    if (!this.blogsLoaded) {
+      // console.log("hello from created");
+      this.loadBlogs();
+    }
   },
   methods: {
     async loadBlogs() {
       try {
         await this.$store.dispatch("loadBlogs");
+        this.blogsLoaded = true;
       } catch (err) {
+        console.log(err.message);
         this.error = err.message || "Blogs cannot be loaded at this moment";
       }
     },

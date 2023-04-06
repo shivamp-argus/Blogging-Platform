@@ -104,11 +104,16 @@ usersSchema.pre("save", async function (next) {
   next();
 });
 
-usersSchema.pre("remove", async function (next) {
-  await Blogs.deleteMany({ userId: this._id });
-  await Comments.deleteMany({ userComId: this._id });
-  next();
-});
+usersSchema.pre(
+  "findOneAndDelete",
+  { query: true, document: false },
+  async function (next) {
+    console.log(this);
+    await Blogs.deleteMany({ userId: this._conditions._id });
+    await Comments.deleteMany({ userComId: this._conditions._id });
+    next();
+  }
+);
 
 const Users = mongoose.model("Users", usersSchema);
 

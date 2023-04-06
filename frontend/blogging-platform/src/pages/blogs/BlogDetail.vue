@@ -26,6 +26,9 @@
         <button class="btn btn-dark card-footer ms-3" @click="deleteBlog">
           Delete Blog
         </button>
+        <button class="btn btn-dark card-footer ms-3" @click="updateBlog">
+          Update Blog
+        </button>
       </div>
 
       <ul class="list-group list-group-flush" v-if="hasComments === true">
@@ -81,10 +84,20 @@ export default {
     },
     async deleteBlog() {
       try {
-        await this.$store.dispatch("deleteBlog", this.id);
-        this.$router.replace("/blogs");
+        await this.$store.dispatch("deleteBlog", {
+          blogId: this.id,
+          blog: this.blogs,
+        });
+        // this.$router.replace("/blogs");
       } catch (err) {
         this.error = err.message || "You are not allowed";
+      }
+    },
+    async updateBlog() {
+      try {
+        await this.$store.dispatch("updateBlog", this.id);
+      } catch (err) {
+        this.error = err.message || "You are not allowed to update";
       }
     },
   },
