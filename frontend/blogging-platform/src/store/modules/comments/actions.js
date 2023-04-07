@@ -32,4 +32,21 @@ export default {
       console.log(err.message);
     }
   },
+  async deleteComment(_, payload) {
+    try {
+      const token = localStorage.getItem("token");
+      await fetch(
+        `http://localhost:4000/comment/${payload.blogId}/${payload.commentId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } catch (err) {
+      console.log(err.message);
+    }
+  },
 };

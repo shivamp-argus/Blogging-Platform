@@ -1,14 +1,18 @@
 <template>
-  <li
+  <comment-detail
     class="list-group-item"
     v-for="comment of commentsList"
     :key="comment._id"
+    :comment="comment"
   >
-    {{ comment.commentText }}
-  </li>
+  </comment-detail>
 </template>
 <script>
+import CommentDetail from "./CommentDetail.vue";
 export default {
+  components: {
+    "comment-detail": CommentDetail,
+  },
   props: ["id"],
   created() {
     this.loadComments();

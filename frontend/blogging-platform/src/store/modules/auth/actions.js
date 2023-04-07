@@ -46,4 +46,14 @@ export default {
       token: null,
     });
   },
+  autoLogin(context) {
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+    if (token && userId) {
+      context.commit("setUser", {
+        userId,
+        token,
+      });
+    }
+  },
 };

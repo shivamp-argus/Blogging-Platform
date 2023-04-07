@@ -43,25 +43,20 @@ export default {
       console.log(err);
     }
   },
-  async deleteBlog(context, payload) {
+  async deleteBlog(_, payload) {
     try {
       const token = localStorage.getItem("token");
-      // const userId = localStorage.getItem("userId");
-      const response = await fetch(`http://localhost:4000/blog/${payload}`, {
+      console.log(payload);
+      await fetch(`http://localhost:4000/blog/${payload.blogId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
-
-      const responseData = await response.json();
-      console.log(responseData);
-      // const blogs = context.getters["blogs"];
-
-      context.commit("deleteBlog", responseData);
     } catch (err) {
       console.log(err.message);
+      // return;
     }
   },
   async updateBlog(context, payload) {
@@ -79,6 +74,14 @@ export default {
       context.commit("setBlog", responseData);
     } catch (err) {
       console.log(err.message);
+    }
+  },
+  isAuthenticated(context) {
+    const token = localStorage.getItem("token");
+    if (token) {
+      context.commit("isAuthenticated", true);
+    } else {
+      context.commit("isAuthenticated", false);
     }
   },
 };

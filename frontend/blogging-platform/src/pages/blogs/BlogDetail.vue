@@ -88,7 +88,7 @@ export default {
           blogId: this.id,
           blog: this.blogs,
         });
-        // this.$router.replace("/blogs");
+        this.$router.replace("/blogs");
       } catch (err) {
         this.error = err.message || "You are not allowed";
       }

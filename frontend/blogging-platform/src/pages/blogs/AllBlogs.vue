@@ -31,7 +31,6 @@ export default {
   },
   computed: {
     blogs() {
-      console.log("hello from blogs");
       return this.$store.getters["blogs"];
     },
     hasBlogs() {
