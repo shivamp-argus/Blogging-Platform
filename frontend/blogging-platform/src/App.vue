@@ -4,9 +4,9 @@
     <div class="row">
       <user-profile
         class="col-3 mt-3"
-        v-if="navLink !== '/profile'"
+        v-if="navLink !== '/profile' && navLink === '/blogs'"
       ></user-profile>
-      <div class="col-9 justify-content-between mt-3">
+      <div class="col justify-content-between mt-3">
         <router-view> </router-view>
       </div>
     </div>
@@ -35,4 +35,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+</style>

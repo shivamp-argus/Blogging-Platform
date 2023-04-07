@@ -34,7 +34,6 @@
 </template>
 <script>
 export default {
-  // props: ["blog"],
   data() {
     return {
       title: "",

@@ -27,12 +27,14 @@
           <button
             class="btn btn-dark card-footer ms-3 float-end"
             @click="deleteBlog"
+            v-if="updateAllowed"
           >
             Delete Blog
           </button>
           <router-link
             class="btn btn-dark card-footer ms-3 float-end"
             :to="updateRoute"
+            v-if="updateAllowed"
           >
             Update Blog
           </router-link>
@@ -70,6 +72,10 @@ export default {
     },
     updateRoute() {
       return this.$route.path + "/update";
+    },
+    updateAllowed() {
+      const blogUserId = this.$store.getters["blogDetail"].blog.userId;
+      return blogUserId === localStorage.getItem("userId");
     },
   },
   created() {
