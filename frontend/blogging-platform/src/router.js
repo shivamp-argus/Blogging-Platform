@@ -6,6 +6,7 @@ const UserAuth = () => import("./pages/auth/UserAuth.vue");
 const BlogDetail = () => import("./pages/blogs/BlogDetail.vue");
 const CreateBlog = () => import("./components/blogs/CreateBlog.vue");
 const NotFound = () => import("./pages/NotFound.vue");
+const UserProfile = () => import("./pages/auth/UserProfile.vue");
 
 const router = createRouter({
   history: createWebHistory(),
@@ -14,7 +15,18 @@ const router = createRouter({
     { path: "/blogs", component: AllBlogs },
     { path: "/blogs/:id", props: true, component: BlogDetail },
     { path: "/auth", component: UserAuth, meta: { requiresUnauth: true } },
-    { path: "/blogs/create", component: CreateBlog },
+    { path: "/profile", component: UserProfile, meta: { requiresAuth: true } },
+    {
+      path: "/blogs/create",
+      component: CreateBlog,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/blogs/:id/update",
+      props: true,
+      component: CreateBlog,
+      meta: { requiresAuth: true },
+    },
     { path: "/:pathMatch(.*)*", component: NotFound },
   ],
 });

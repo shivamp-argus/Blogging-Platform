@@ -14,31 +14,32 @@
         <button class="btn btn-dark card-footer me-3" @click="toggleComments">
           View Comments
         </button>
-        <add-comment
-          ><button
-            class="btn btn-dark card-footer"
-            data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop"
+        <span v-if="isAuthenticated">
+          <add-comment
+            ><button
+              class="btn btn-dark card-footer"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+            >
+              Add Comment
+            </button>
+          </add-comment>
+          <button
+            class="btn btn-dark card-footer ms-3 float-end"
+            @click="deleteBlog"
           >
-            Add Comment
+            Delete Blog
           </button>
-        </add-comment>
-        <button class="btn btn-dark card-footer ms-3" @click="deleteBlog">
-          Delete Blog
-        </button>
-        <button class="btn btn-dark card-footer ms-3" @click="updateBlog">
-          Update Blog
-        </button>
+          <router-link
+            class="btn btn-dark card-footer ms-3 float-end"
+            :to="updateRoute"
+          >
+            Update Blog
+          </router-link>
+        </span>
       </div>
 
       <ul class="list-group list-group-flush" v-if="hasComments === true">
-        <!-- <li
-          class="list-group-item"
-          v-for="comment of comments"
-          :key="comment._id"
-        >
-          {{ comment.commentText }}
-        </li> -->
         <comment-list :id="id"></comment-list>
       </ul>
     </div>
@@ -64,9 +65,12 @@ export default {
     blog() {
       return this.$store.getters["blogDetail"].blog;
     },
-    // comments() {
-    //   return this.$store.getters["blogDetail"].comments;
-    // },
+    isAuthenticated() {
+      return this.$store.getters["isAuthenticated"];
+    },
+    updateRoute() {
+      return this.$route.path + "/update";
+    },
   },
   created() {
     this.blogDetail();
@@ -86,7 +90,7 @@ export default {
       try {
         await this.$store.dispatch("deleteBlog", {
           blogId: this.id,
-          blog: this.blogs,
+          blog: this.blog,
         });
         this.$router.replace("/blogs");
       } catch (err) {

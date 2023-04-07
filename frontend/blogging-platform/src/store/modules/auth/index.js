@@ -7,6 +7,11 @@ export default {
     return {
       userId: "",
       token: "",
+      user: {
+        username: "",
+        email: "",
+        blogs: [],
+      },
     };
   },
   mutations,

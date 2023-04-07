@@ -20,10 +20,10 @@ export default {
     }
   },
 
-  async createBlog(context, payload) {
+  async createBlog(_, payload) {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:4000/blog", {
+      await fetch("http://localhost:4000/blog", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,11 +34,6 @@ export default {
           body: payload.body,
         }),
       });
-      const responseData = await response.json();
-      // console.log(responseData);
-      const blogs = context.getters["blogs"].push(responseData);
-      console.log(blogs);
-      context.commit("setBlogs", blogs);
     } catch (err) {
       console.log(err);
     }
@@ -46,7 +41,6 @@ export default {
   async deleteBlog(_, payload) {
     try {
       const token = localStorage.getItem("token");
-      console.log(payload);
       await fetch(`http://localhost:4000/blog/${payload.blogId}`, {
         method: "DELETE",
         headers: {
@@ -56,32 +50,24 @@ export default {
       });
     } catch (err) {
       console.log(err.message);
-      // return;
     }
   },
-  async updateBlog(context, payload) {
+  async updateBlog(_, payload) {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`http://localhost:4000/blog/${payload}`, {
+      await fetch(`http://localhost:4000/blog/${payload.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: payload.blog,
+        body: JSON.stringify({
+          title: payload.title,
+          body: payload.body,
+        }),
       });
-      const responseData = await response.json();
-      context.commit("setBlog", responseData);
     } catch (err) {
       console.log(err.message);
-    }
-  },
-  isAuthenticated(context) {
-    const token = localStorage.getItem("token");
-    if (token) {
-      context.commit("isAuthenticated", true);
-    } else {
-      context.commit("isAuthenticated", false);
     }
   },
 };

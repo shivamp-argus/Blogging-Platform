@@ -3,4 +3,7 @@ export default {
     state.token = payload.token;
     state.userId = payload.userId;
   },
+  setProfile(state, payload) {
+    state.user = payload;
+  },
 };

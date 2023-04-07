@@ -56,4 +56,31 @@ export default {
       });
     }
   },
+  // setting up user profile
+  async loadProfile(context) {
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await fetch("http://localhost:4000/user/me", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const responseData = await response.json();
+      const { users, blogs } = responseData;
+      let blogList = [];
+      for (let blog of blogs) {
+        blogList.push({ blogId: blog._id, blogTitle: blog.title });
+      }
+
+      context.commit("setProfile", {
+        username: users.username,
+        email: users.email,
+        blogs: blogList,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };

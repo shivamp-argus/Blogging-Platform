@@ -1,6 +1,6 @@
 <template>
   <router-link :to="blogDetailLink" class="text-decoration-none text-dark">
-    <div class="card mt-4">
+    <div class="card mb-4">
       <div class="card-header">{{ title }}</div>
       <div class="card-body">
         <h5 class="card-title">Lorem, ipsum dolor sit amet</h5>

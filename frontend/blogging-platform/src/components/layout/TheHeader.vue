@@ -27,7 +27,8 @@
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
+          <li class="nav-item d-flex">
+            <router-link to="/profile" class="nav-link">Profile</router-link>
             <router-link to="/auth" class="nav-link" v-if="!isLoggedIn"
               >Login</router-link
             >
