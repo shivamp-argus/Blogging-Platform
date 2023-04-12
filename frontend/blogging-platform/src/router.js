@@ -7,11 +7,11 @@ const BlogDetail = () => import('./pages/blogs/BlogDetail.vue');
 const CreateBlog = () => import('./components/blogs/CreateBlog.vue');
 const NotFound = () => import('./pages/NotFound.vue');
 const UserProfile = () => import('./pages/auth/UserProfile.vue');
+const HomePage = () => import('./pages/HomePage.vue');
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/', redirect: '/blogs' },
     { path: '/blogs', component: AllBlogs },
     { path: '/blogs/:id', props: true, component: BlogDetail },
     {
@@ -26,6 +26,7 @@ const router = createRouter({
       component: CreateBlog,
       meta: { requiresAuth: true },
     },
+    { path: '/', component: HomePage },
     {
       path: '/blogs/:id/update',
       props: true,
