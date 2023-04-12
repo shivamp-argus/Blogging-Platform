@@ -4,9 +4,9 @@
     <h6>Email: {{ user.email }}</h6>
     <hr />
     <div>
-      <h4>My blogs</h4>
-
-      <ul class="list-group">
+      <h4>My blog</h4>
+      <!-- <p v-if="isBlogs">Hey you don't have any blogs</p> -->
+      <ul class="list-group" >
         <router-link
           :to="'/blogs/' + blog.blogId"
           v-for="blog of user.blogs"
@@ -29,8 +29,14 @@ export default {
     };
   },
   computed: {
+    isBlogs(){
+      if(!this.user){
+        return false
+      }
+      return true
+    },
     user() {
-      return this.$store.getters['user'];
+      return  this.$store.getters['user'];
     },
   },
   updated() {
