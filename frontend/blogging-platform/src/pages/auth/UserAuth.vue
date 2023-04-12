@@ -35,13 +35,13 @@
       <button class="btn btn-dark me-3">
         {{ submitButtonCaption }}
       </button>
-      <button
+      <!-- <button
         class="btn btn-light btn-outline-dark"
         type="button"
         @click="switchAuthMode"
       >
         {{ switchModeButton }}
-      </button>
+      </button> -->
     </div>
     <p v-if="!formIsValid">
       Please enter valid email and password with length more than 6 characters
@@ -50,37 +50,45 @@
 </template>
 <script>
 export default {
+  // inject: {
+  //   mode: {
+  //     default: 'signup',
+  //   },
+  // },
+  // props: ['mode'],
   data() {
     return {
-      username: "",
-      password: "",
-      email: "",
-      mode: "login",
+      username: '',
+      password: '',
+      email: '',
+      mode: this.$route.params.mode,
       formIsValid: true,
       error: null,
     };
   },
   computed: {
     submitButtonCaption() {
-      if (this.mode === "login") {
-        return "Login";
+      if (this.mode === 'login') {
+        return 'Login';
       } else {
-        return "Sign-Up";
+        return 'Sign-Up';
       }
     },
     switchModeButton() {
-      if (this.mode === "login") {
-        return "Sign-Up";
+      if (this.mode === 'login') {
+        return 'Sign-Up';
       } else {
-        return "Login";
+        return 'Login';
       }
     },
   },
+
   methods: {
     async userFormData() {
+      console.log(this.$route.params);
       if (
-        this.email === "" ||
-        !this.email.includes("@") ||
+        this.email === '' ||
+        !this.email.includes('@') ||
         this.password.length < 6
       ) {
         this.formIsValid = false;
@@ -93,25 +101,25 @@ export default {
         username: this.username,
       };
       try {
-        if (this.mode === "login") {
-          await this.$store.dispatch("login", actionPayload);
+        if (this.mode === 'login') {
+          await this.$store.dispatch('login', actionPayload);
         } else {
-          await this.$store.dispatch("signup", actionPayload);
+          await this.$store.dispatch('signup', actionPayload);
         }
-        const redirectUrl = "/" + (this.$route.query.redirect || "blogs");
+        const redirectUrl = '/' + (this.$route.query.redirect || 'blogs');
         this.$router.replace(redirectUrl);
       } catch (err) {
         console.log(err);
-        this.error = err.message || "Failed to authenticate";
+        this.error = err.message || 'Failed to authenticate';
       }
     },
-    switchAuthMode() {
-      if (this.mode === "login") {
-        this.mode = "signup";
-      } else {
-        this.mode = "login";
-      }
-    },
+    // switchAuthMode() {
+    //   if (this.mode === 'login') {
+    //     this.mode = 'signup';
+    //   } else {
+    //     this.mode = 'login';
+    //   }
+    // },
   },
 };
 </script>

@@ -28,8 +28,22 @@
         </ul>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item d-flex">
-            <router-link to="/profile" class="nav-link">Profile</router-link>
-            <router-link to="/auth" class="nav-link" v-if="!isLoggedIn"
+            <router-link to="/profile" class="nav-link" v-if="isLoggedIn"
+              >Profile</router-link
+            >
+            <router-link
+              :to="{
+                name: 'auth',
+                params: { mode: 'signup' },
+              }"
+              class="nav-link"
+              v-else
+              >Sign-Up</router-link
+            >
+            <router-link
+              :to="{ name: 'auth', params: { mode: 'login' } }"
+              class="nav-link"
+              v-if="!isLoggedIn"
               >Login</router-link
             >
             <router-link to="/auth" class="nav-link" v-else @click="logout"
@@ -44,19 +58,28 @@
 
 <script>
 export default {
+  data() {
+    return {};
+  },
+  // provide: {
+  //   mode: 'signup',
+  // },
   computed: {
     isLoggedIn() {
       return this.$store.getters.isAuthenticated;
     },
+    signup() {
+      return 'signup';
+    },
   },
+
   methods: {
     logout() {
-      this.$store.dispatch("logout");
-      this.$router.replace("/auth");
+      this.$store.dispatch('logout');
+      this.$router.replace('/auth/login');
     },
   },
 };
 </script>
-auth
 
 <style></style>

@@ -7,13 +7,16 @@
       <h4>My blogs</h4>
 
       <ul class="list-group">
-        <li v-for="blog of user.blogs" :key="blog._id" class="list-group-item">
-          <router-link
-            :to="blogDetailLink + '/' + blog.blogId"
-            class="text-decoration-none text-dark"
-            >{{ blog.blogTitle }}</router-link
-          >
-        </li>
+        <router-link
+          :to="'/blogs/' + blog.blogId"
+          v-for="blog of user.blogs"
+          :key="blog._id"
+          class="list-group-item"
+        >
+          <li class="text-decoration-none text-dark">
+            {{ blog.blogTitle }}
+          </li>
+        </router-link>
       </ul>
     </div>
   </div>
@@ -27,10 +30,7 @@ export default {
   },
   computed: {
     user() {
-      return this.$store.getters["user"];
-    },
-    blogDetailLink() {
-      return this.$route.path;
+      return this.$store.getters['user'];
     },
   },
   updated() {
@@ -42,11 +42,16 @@ export default {
   methods: {
     async loadUser() {
       try {
-        await this.$store.dispatch("loadProfile");
+        await this.$store.dispatch('loadProfile');
       } catch (err) {
-        this.error = err.message || "You are not authenticated";
+        this.error = err.message || 'You are not authenticated';
       }
     },
   },
 };
 </script>
+<style scoped>
+li {
+  list-style: none;
+}
+</style>
