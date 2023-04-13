@@ -16,7 +16,10 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link to="/blogs" class="nav-link" aria-current="page"
+            <router-link
+              :to="{ path: '/blogs', query: { page: 1 } }"
+              class="nav-link"
+              aria-current="page"
               >Blogs</router-link
             >
           </li>

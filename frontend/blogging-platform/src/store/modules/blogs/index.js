@@ -1,6 +1,6 @@
-import mutations from "./mutations";
-import actions from "./actions";
-import getters from "./getters";
+import mutations from './mutations';
+import actions from './actions';
+import getters from './getters';
 
 export default {
   state() {
@@ -8,11 +8,12 @@ export default {
       blogs: [],
       blog: {
         blog: {
-          title: "",
-          body: "",
+          title: '',
+          body: '',
         },
         comments: [],
       },
+      count: 0,
     };
   },
   mutations,

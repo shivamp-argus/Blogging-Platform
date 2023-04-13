@@ -1,10 +1,13 @@
 export default {
-  async loadBlogs(context) {
+  async loadBlogs(context, payload) {
     try {
-      const response = await fetch("http://localhost:4000/blog");
+      const response = await fetch(
+        `http://localhost:4000/blog?page=${payload.page}`
+      );
       const responseData = await response.json();
 
-      context.commit("setBlogs", responseData);
+      context.commit('setBlogs', responseData.blogs);
+      context.commit('setPages', responseData.count);
     } catch (err) {
       console.log(err.message);
     }
@@ -14,7 +17,7 @@ export default {
       const response = await fetch(`http://localhost:4000/blog/${payload}`);
       const responseData = await response.json();
 
-      context.commit("setBlog", responseData);
+      context.commit('setBlog', responseData);
     } catch (err) {
       console.log(err.message);
     }
@@ -22,11 +25,11 @@ export default {
 
   async createBlog(_, payload) {
     try {
-      const token = localStorage.getItem("token");
-      await fetch("http://localhost:4000/blog", {
-        method: "POST",
+      const token = localStorage.getItem('token');
+      await fetch('http://localhost:4000/blog', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
@@ -40,11 +43,11 @@ export default {
   },
   async deleteBlog(_, payload) {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
       await fetch(`http://localhost:4000/blog/${payload.blogId}`, {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       });
@@ -54,11 +57,11 @@ export default {
   },
   async updateBlog(_, payload) {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
       await fetch(`http://localhost:4000/blog/${payload.id}`, {
-        method: "PATCH",
+        method: 'PATCH',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({

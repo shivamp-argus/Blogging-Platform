@@ -12,7 +12,7 @@ const HomePage = () => import('./pages/HomePage.vue');
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/blogs', component: AllBlogs },
+    { path: '/blogs', query: { page: 1 }, component: AllBlogs },
     { path: '/blogs/:id', props: true, component: BlogDetail },
     {
       path: '/auth/:mode',

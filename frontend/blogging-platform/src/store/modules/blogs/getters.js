@@ -8,4 +8,7 @@ export default {
   commentUser(state) {
     return state.blog.comments;
   },
+  count(state) {
+    return state.count;
+  },
 };

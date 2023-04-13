@@ -12,4 +12,7 @@ export default {
     state.blogs = state.blogs.slice(index, 1);
     console.log(state.blogs);
   },
+  setPages(state, payload) {
+    state.count = payload;
+  },
 };
