@@ -1,16 +1,13 @@
 <template>
-  <the-header></the-header>
-  <div class="container">
+  <the-header v-if="this.$route.path !== '/'"></the-header>
+  <router-view> </router-view>
+  <!-- <div class="container">
     <div class="row">
-      <!-- <user-profile
-        class="col-3 mt-3"
-        v-if="navLink !== '/profile' && navLink === '/blogs' && isAuthenticated"
-      ></user-profile> -->
       <div class="col justify-content-between mt-3">
-        <router-view :key="this.$route.params.mode"> </router-view>
+        <router-view> </router-view>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -39,5 +36,16 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body {
+  min-height: 100vh;
+  width: 100%;
+  background: #2e3658;
+}
 </style>

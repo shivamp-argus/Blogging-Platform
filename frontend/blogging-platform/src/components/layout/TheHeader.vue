@@ -1,7 +1,11 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary navMain">
     <div class="container">
-      <router-link class="navbar-brand" to="/">Blogger</router-link>
+      <router-link class="navbar-brand navBrand" to="/"
+        ><img src="../../../public/assets/images/logo.png" alt="#"
+      /></router-link>
+      <!-- <img src="../../../public/assets/images/logo.png" alt="Blogger"
+      /> -->
       <button
         class="navbar-toggler"
         type="button"
@@ -13,7 +17,7 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="collapse navbar-collapse navMenu" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
             <router-link
@@ -85,4 +89,41 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.navMain {
+  min-height: 100px;
+  /* background-color: #02251f; */
+}
+.navBrand {
+  color: #f6f4e6;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding-right: 20px;
+}
+.navMenu {
+  position: absolute;
+  top: 50%;
+  left: 33%;
+
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.navMenu a {
+  color: #f6f4e6;
+  text-decoration: none;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: inline-block;
+  /* width: 150px; */
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.navMenu a:hover,
+.navBrand:hover {
+  color: #02fee5;
+}
+</style>
