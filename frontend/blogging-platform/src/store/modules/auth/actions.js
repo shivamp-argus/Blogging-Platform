@@ -93,7 +93,12 @@ export default {
       const { users, blogs } = responseData;
       let blogList = [];
       for (let blog of blogs) {
-        blogList.push({ blogId: blog._id, blogTitle: blog.title });
+        // console.log(blog);
+        blogList.push({
+          blogId: blog._id,
+          blogTitle: blog.title,
+          blogBody: blog.body,
+        });
       }
 
       context.commit('setProfile', {

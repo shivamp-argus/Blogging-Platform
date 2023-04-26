@@ -37,11 +37,6 @@ export default {
 };
 </script>
 <style scoped>
-/* Demo Code: */
-.projcard-container {
-  margin: 50px 0;
-}
-
 /* Actual Code: */
 .projcard-container,
 .projcard-container * {
@@ -143,7 +138,7 @@ export default {
 .projcard-title {
   font-family: 'Voces', 'Open Sans', arial, sans-serif;
   font-size: 24px;
-  color: #2e3658;
+  color: #614600;
 }
 .projcard-subtitle {
   font-family: 'Voces', 'Open Sans', arial, sans-serif;
@@ -159,7 +154,7 @@ export default {
   transition: width 0.2s ease;
 }
 .projcard-blue .projcard-bar {
-  background-color: #2e3658;
+  background-color: #614600;
 }
 .projcard-blue::before {
   background-image: linear-gradient(-70deg, #2e3658, transparent 50%);

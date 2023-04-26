@@ -35,17 +35,19 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
 }
+
 body {
-  min-height: 100vh;
   width: 100%;
-  background: #2e3658;
+  position: relative;
+  font-family: 'poppins', sans-serif;
+  background-color: #614600;
 }
 </style>

@@ -4,8 +4,7 @@
       <router-link class="navbar-brand navBrand" to="/"
         ><img src="../../../public/assets/images/logo.png" alt="#"
       /></router-link>
-      <!-- <img src="../../../public/assets/images/logo.png" alt="Blogger"
-      /> -->
+
       <button
         class="navbar-toggler"
         type="button"
@@ -18,8 +17,8 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse navMenu" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
+        <ul class="navbar-nav links-container">
+          <li class="nav-item link-item">
             <router-link
               :to="{ path: '/blogs', query: { page: 1 } }"
               class="nav-link"
@@ -27,14 +26,14 @@
               >Blogs</router-link
             >
           </li>
-          <li class="nav-item">
+          <li class="nav-item link-item">
             <router-link to="/blogs/create" class="nav-link"
               >Create Blog</router-link
             >
           </li>
         </ul>
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item d-flex">
+        <ul class="navbar-nav ms-auto links-container">
+          <li class="nav-item d-flex link-item">
             <router-link to="/profile" class="nav-link" v-if="isLoggedIn"
               >Profile</router-link
             >
@@ -91,9 +90,19 @@ export default {
 
 <style scoped>
 .navMain {
-  min-height: 100px;
-  /* background-color: #02251f; */
+  width: 100%;
+  min-height: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5vw;
+  background: #fff;
+  z-index: 9;
 }
+
 .navBrand {
   color: #f6f4e6;
   font-size: 1.2em;
@@ -104,13 +113,13 @@ export default {
 .navMenu {
   position: absolute;
   top: 50%;
-  left: 33%;
+  left: 34.5%;
 
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
 
-.navMenu a {
+/* .navMenu a {
   color: #f6f4e6;
   text-decoration: none;
   font-size: 1.2em;
@@ -118,12 +127,24 @@ export default {
   font-weight: 500;
   display: inline-block;
   /* width: 150px; */
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-}
+/* -webkit-transition: all 0.2s ease-in-out; */
+/* transition: all 0.2s ease-in-out; */
+/* } */
 
-.navMenu a:hover,
+/* .navMenu a:hover,
 .navBrand:hover {
   color: #02fee5;
+} */
+.links-container {
+  display: flex;
+  list-style: none;
+}
+
+.link {
+  padding: 10px;
+  margin-left: 10px;
+  text-decoration: none;
+  text-transform: capitalize;
+  color: #000;
 }
 </style>

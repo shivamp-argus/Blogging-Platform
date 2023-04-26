@@ -8,18 +8,18 @@
   </comment-detail>
 </template>
 <script>
-import CommentDetail from "./CommentDetail.vue";
+import CommentDetail from './CommentDetail.vue';
 export default {
   components: {
-    "comment-detail": CommentDetail,
+    'comment-detail': CommentDetail,
   },
-  props: ["id"],
+  props: ['id'],
   created() {
     this.loadComments();
   },
   computed: {
     commentsList() {
-      return this.$store.getters["comments"];
+      return this.$store.getters['comments'];
     },
   },
   updated() {
@@ -28,9 +28,13 @@ export default {
   methods: {
     async loadComments() {
       const blogId = this.$route.params.id;
-      this.$store.dispatch("loadComments", blogId);
+      this.$store.dispatch('loadComments', blogId);
     },
   },
 };
 </script>
-<style></style>
+<style scoped>
+.list-group-item {
+  height: 40px;
+}
+</style>

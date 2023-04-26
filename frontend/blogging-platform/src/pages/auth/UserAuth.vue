@@ -145,17 +145,13 @@ export default {
 <style scoped>
 /* Import Google font - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
+
 .container {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+
+  left: 38%;
+  /* transform: translate(-50%, -50%); */
+  margin-top: 10%;
   max-width: 430px;
   width: 100%;
   background: #fff;
@@ -192,7 +188,7 @@ button:focus {
 }
 .form a {
   font-size: 16px;
-  color: #20a799;
+  color: #614600;
   text-decoration: none;
 }
 .form a:hover {
@@ -201,7 +197,7 @@ button:focus {
 .form input.button,
 button.button {
   color: #fff;
-  background: #20a799;
+  background: #614600;
   font-size: 1.2rem;
   font-weight: 500;
   letter-spacing: 1px;
@@ -209,10 +205,7 @@ button.button {
   cursor: pointer;
   transition: 0.4s;
 }
-.form input.button:hover,
-button.button:hover {
-  background: #2e3658;
-}
+
 .signup {
   font-size: 17px;
   text-align: center;
@@ -225,45 +218,3 @@ button.button:hover {
   text-decoration: underline;
 }
 </style>
-<!-- <form class="container" @submit.prevent="userFormData">
-    <div class="mb-3" v-if="mode === 'signup'">
-      <label for="username" class="form-label">Enter your username</label>
-      <input
-        type="text"
-        class="form-control"
-        id="username"
-        v-model.trim="username"
-      />
-    </div>
-    <div class="mb-3">
-      <label for="email" class="form-label">Email address</label>
-      <input
-        type="email"
-        class="form-control"
-        id="email"
-        aria-describedby="emailHelp"
-        v-model.trim="email"
-      />
-      <div id="emailHelp" class="form-text">
-        We'll never share your email with anyone else.
-      </div>
-    </div>
-    <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input
-        type="password"
-        class="form-control"
-        id="password"
-        v-model.trim="password"
-      />
-    </div>
-    <div class="actions">
-      <button class="btn btn-dark me-3">
-        {{ submitButtonCaption }}
-      </button>
-     
-    </div>
-    <p v-if="!formIsValid">
-      Please enter valid email and password with length more than 6 characters
-    </p>
-  </form> -->

@@ -9,8 +9,8 @@
         :title="blog.title"
         class="mt-2"
       ></blog-item>
-      <nav class="">
-        <ul class="pagination">
+      <nav>
+        <ul class="pagination paginationNavMain">
           <li class="page-item" v-if="minCount">
             <router-link
               :to="{
@@ -20,14 +20,14 @@
                     this.$route.query.page > 1 ? this.$route.query.page - 1 : 1,
                 },
               }"
-              class="page-link"
+              class="page-link paginationNav"
               >Previous</router-link
             >
           </li>
           <li class="page-item" v-for="countNumber in count" :key="countNumber">
             <router-link
               :to="{ path: this.$route.path, query: { page: countNumber } }"
-              class="page-link"
+              class="page-link paginationNav"
               >{{ countNumber }}</router-link
             >
           </li>
@@ -39,7 +39,7 @@
                   page: 1 + +this.$route.query.page,
                 },
               }"
-              class="page-link"
+              class="page-link paginationNav"
               >Next</router-link
             >
           </li>
@@ -122,4 +122,15 @@ export default {
   },
 };
 </script>
-<style></style>
+<style scoped>
+.container {
+  margin-top: 5%;
+  margin-left: 8%;
+}
+.paginationNav {
+  color: #614600;
+}
+.paginationNavMain {
+  justify-content: center;
+}
+</style>
